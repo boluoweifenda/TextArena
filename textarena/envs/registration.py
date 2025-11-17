@@ -6,12 +6,17 @@ import textarena as ta
 
 try:
     import nltk
+    from importlib import resources as res
     from pathlib import Path
-    # 简化：优先使用环境变量，否则回退到仓库根的 nltk_data
-    NLTK_DATA = os.getenv('NLTK_DATA') or str(Path(__file__).resolve().parents[3] / 'TextArena/nltk_data')
-    nltk.data.path.insert(0, NLTK_DATA)
-    print('NLTK_DATA:', NLTK_DATA)
-    # Disable any downloads: always return True and do nothing
+
+    env_path = os.getenv('NLTK_DATA')
+    pkg_path = os.fspath(res.files('textarena') / 'nltk_data')
+    repo_path = os.fspath(Path(__file__).resolve().parents[3] / 'TextArena' / 'nltk_data')
+    print('nltk_data paths:', env_path, pkg_path, repo_path)
+    for p in [env_path, pkg_path, repo_path]:
+        if p and os.path.isdir(p) and p not in nltk.data.path:
+            nltk.data.path.insert(0, p)
+
     def _noop_download(*args, **kwargs):
         return True
     nltk.download = _noop_download
