@@ -1,6 +1,6 @@
 import re, random
 from typing import List, Optional, Tuple, Dict, Any
-
+import numpy as np
 import textarena as ta
 
 
@@ -74,6 +74,7 @@ class Game2048Env(ta.Env):
         return total
 
     def _get_percentage_completion(self) -> float:
+        return min(1.0, np.log2(self._max_tile()) / np.log2(self.target_tile))
         if self._max_tile() >= self.target_tile: return 1.0
         min_score_needed = self._min_score_to_reach_tile(self.target_tile) * 1.5
         score_part = self.state.game_state['score'] / min_score_needed

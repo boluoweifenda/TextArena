@@ -26,6 +26,7 @@ class BlackjackEnv(ta.Env):
         return (
             "You are playing Blackjack against the dealer.\nYour goal is to get as close to 21 as possible without going over.\n"
             "On your turn, choose '[Hit]' to draw another card or '[Stand]' to hold.\nJ/Q/K = 10 points; A = 11 or 1, whichever is better.\n"
+            "Dealer: after you stand, the dealer draws until reaching at least 17, then stands.\n"
         )
 
     def _hand_score(self, hand: List[str]) -> int:
@@ -89,7 +90,8 @@ class BlackjackEnv(ta.Env):
     def _observe_state(self):
         gs = self.state.game_state
         score = self._hand_score(gs['player_hand'])
-        msg = f"Hand {gs['hand_number']}/{gs['num_hands']}\nYour hand: {', '.join(gs['player_hand'])} (Score: {score})\nDealer shows: {gs['dealer_hand'][0]}"
+        dealer_score = self._hand_score(gs['dealer_hand'])
+        msg = f"Hand {gs['hand_number']}/{gs['num_hands']}\nYour hand: {', '.join(gs['player_hand'])} (Score: {score})\nDealer shows: {gs['dealer_hand'][0]} (Score: {dealer_score})"
         self.state.add_observation(to_id=-1, message=msg, observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _get_percentage_completion(self) -> float:

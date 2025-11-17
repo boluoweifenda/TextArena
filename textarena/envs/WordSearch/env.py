@@ -420,12 +420,12 @@ class WordSearchEnv(ta.Env):
             (actual_start == expected_end and actual_end == expected_start):
                 self.correct_words.add(placed_word)
                 self._highlight_word(start_row, start_col, end_row, end_col)
-                print(f"Correct! The word '{placed_word}' was found.")
+                # print(f"Correct! The word '{placed_word}' was found.")
                 return True
 
         # If no match, record as an incorrect attempt
         self.incorrect_attempts.append((start_row, start_col, end_row, end_col))
-        print("Incorrect attempt.")
+        # print("Incorrect attempt.")
         return False
 
         
@@ -511,7 +511,7 @@ class WordSearchEnv(ta.Env):
             self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
         else:
             for match in matches:
-                print("Checking match:", match)
+                # print("Checking match:", match)
                 start_row, start_col, end_row, end_col = [int(x) for x in match]
                 if not (0 <= start_row < len(self.state.game_state["board"]) 
                         and 0 <= start_col < len(self.state.game_state["board"][0]) 

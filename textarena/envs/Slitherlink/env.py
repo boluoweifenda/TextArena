@@ -97,7 +97,7 @@ class SlitherlinkEnv(ta.Env):
             v_edges.add((r, start_c + width))            # right edge
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(self.state.current_player_id, action, ta.ObservationType.PLAYER_ACTION)
+        self.state.add_observation(action, ta.ObservationType.PLAYER_ACTION, from_id=self.state.current_player_id)
 
         m = self._ACTION_RE.fullmatch(action.strip().lower())
         if not m:
@@ -153,6 +153,9 @@ class SlitherlinkEnv(ta.Env):
                     if self._cell_edge_count(r, c) == self.clues[r][c]:
                         satisfied += 1
         return satisfied / max(1, total)
+    
+    def _get_percentage_completion(self) -> float:
+        return self._progress()
 
     def _cell_edge_count(self, r: int, c: int) -> int:
         cnt = 0

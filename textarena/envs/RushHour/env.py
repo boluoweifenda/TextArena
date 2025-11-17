@@ -286,9 +286,9 @@ class RushHourEnv(ta.Env):
             # Make sure puzzle is solvable but not already solved
             if (self._is_solvable(self.initial_layout) and 
                 not self._is_solved_state(vehicles_dict)):
-                print(f"Generated puzzle in {attempt + 1} attempts")
+                # print(f"Generated puzzle in {attempt + 1} attempts")
                 break
-            print(f"Attempt {attempt + 1}: Generated invalid puzzle, retrying...")
+            # print(f"Attempt {attempt + 1}: Generated invalid puzzle, retrying...")
         else:
             print("Warning: Using potentially invalid puzzle after max attempts")
         

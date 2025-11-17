@@ -1,4 +1,5 @@
 import re
+import random
 from typing import Dict, List, Optional, Tuple, Any
 
 import textarena as ta
@@ -13,8 +14,10 @@ class PegJumpEnv(ta.Env):
         (5, 8, 12), (5, 9, 14), (6, 9, 13), (6, 10, 15), (7, 8, 9), (7, 11, 13), (8, 9, 10), (8, 12, 14),
         (9, 12, 13), (9, 13, 15), (10, 9, 8),
     ]
-    def __init__(self, initial_empty: int = 1):
+    def __init__(self, initial_empty: Optional[int] = None):
         super().__init__()
+        if initial_empty is None:
+            initial_empty = random.randint(1, self.BOARD_SIZE)
         if not (1 <= initial_empty <= self.BOARD_SIZE): raise ValueError("initial_empty must be 1-15")
         self.ALLOWED_MOVES: List[Tuple[int, int, int]] = self._BASE_TRIPLES + [(t, o, f) for (f, o, t) in self._BASE_TRIPLES if (t, o, f) not in self._BASE_TRIPLES]
 

@@ -38,14 +38,14 @@ register_with_versions(id="Blackjack-v0",       entry_point="textarena.envs.Blac
 register_with_versions(id="Blackjack-v0-long",  entry_point="textarena.envs.Blackjack.env:BlackjackEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameMessagesObservationWrapper, ActionFormattingWrapper]}, num_hands=15  )
 
 # Countdown [1 Player]
-register_with_versions(id="Countdown-v0", entry_point="textarena.envs.Countdown.env:CountdownEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, numbers=[100, 75, 6, 4, 3, 2], target=532)
+register_with_versions(id="Countdown-v0", entry_point="textarena.envs.Countdown.env:CountdownEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
 
 # Crosswords [1 Player]
 register_with_versions(id="Crosswords-v0",          entry_point="textarena.envs.Crosswords.env:CrosswordsEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, hardcore=False,    max_turns=30, num_words=3)
 register_with_versions(id="Crosswords-v0-hardcore", entry_point="textarena.envs.Crosswords.env:CrosswordsEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, hardcore=True,     max_turns=30, num_words=3)
 
 # Cryptarithm [1 Player]
-register_with_versions(id="Cryptarithm-v0", entry_point="textarena.envs.Cryptarithm.env:CryptarithmEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameMessagesObservationWrapper, ActionFormattingWrapper]}, equation="SEND + MORE = MONEY", max_turns=100)
+register_with_versions(id="Cryptarithm-v0", entry_point="textarena.envs.Cryptarithm.env:CryptarithmEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameMessagesObservationWrapper, ActionFormattingWrapper]}, max_turns=100)
 
 # FifteenPuzzle [1 Player]
 register_with_versions(id="FifteenPuzzle-v0", entry_point="textarena.envs.FifteenPuzzle.env:FifteenPuzzleEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, max_turns=200)
@@ -85,7 +85,7 @@ register_with_versions(id="Minesweeper-v0-medium",  entry_point="textarena.envs.
 register_with_versions(id="Minesweeper-v0-hard",    entry_point="textarena.envs.Minesweeper.env:MinesweeperEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, rows=12, cols=12,    num_mines=30,   max_turns=100)
 
 # PegJump [1 Player]
-register_with_versions(id="PegJump-v0", entry_point="textarena.envs.PegJump.env:PegJumpEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, initial_empty=5)
+register_with_versions(id="PegJump-v0", entry_point="textarena.envs.PegJump.env:PegJumpEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
 
 # RushHour [1 Player]
 register_with_versions(id="RushHour-v0", entry_point="textarena.envs.RushHour.env:RushHourEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})

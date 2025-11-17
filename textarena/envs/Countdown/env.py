@@ -40,7 +40,7 @@ class CountdownEnv(ta.Env):
         self._add_board_observation()
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(self.state.current_player_id, action, ta.ObservationType.PLAYER_ACTION)
+        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         
         # Parse and validate action
         parsed_action = self._parse_action(action)
@@ -139,6 +139,9 @@ class CountdownEnv(ta.Env):
         distance = abs(self.best_value - self.target)
         # Scale progress: exact match = 1.0, distance of 1000 = 0.0
         return max(0.0, 1.0 - distance / 1000.0)
+
+    def _get_percentage_completion(self) -> float:
+        return self._calculate_progress()
 
     def _get_player_prompt(self, player_id, game_state) -> str:
         return (

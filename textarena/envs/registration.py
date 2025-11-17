@@ -1,9 +1,22 @@
-import re, random, importlib
+import re, random, importlib, os
 from typing import Any, Union, List, Callable, Dict, Tuple, Optional
 from dataclasses import dataclass, field
 
 import textarena as ta 
 
+try:
+    import nltk
+    from pathlib import Path
+    # 简化：优先使用环境变量，否则回退到仓库根的 nltk_data
+    NLTK_DATA = os.getenv('NLTK_DATA') or str(Path(__file__).resolve().parents[3] / 'TextArena/nltk_data')
+    nltk.data.path.insert(0, NLTK_DATA)
+    print('NLTK_DATA:', NLTK_DATA)
+    # Disable any downloads: always return True and do nothing
+    def _noop_download(*args, **kwargs):
+        return True
+    nltk.download = _noop_download
+except Exception:
+    pass
 
 # Global environment registry
 ENV_REGISTRY: Dict[str, Callable] = {}
