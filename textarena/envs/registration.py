@@ -11,7 +11,7 @@ try:
 
     env_path = os.getenv('NLTK_DATA')
     pkg_path = os.fspath(res.files('textarena') / 'nltk_data')
-    repo_path = os.fspath(Path(__file__).resolve().parents[3] / 'TextArena' / 'nltk_data')
+    repo_path = os.fspath(Path(__file__).resolve().parents[1] / 'nltk_data')
     print('nltk_data paths:', env_path, pkg_path, repo_path)
     for p in [env_path, pkg_path, repo_path]:
         if p and os.path.isdir(p) and p not in nltk.data.path:
